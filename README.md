@@ -77,13 +77,39 @@ curl -X POST https://startuphub-validator-service.onrender.com/api/validate-emai
   -d '{"email": "john@company.com"}'
 ```
 
-**Response:**
+**Response (valid):**
 ```json
 {
   "success": true,
   "email": "john@company.com",
+  "status": "valid",
   "isValid": true,
+  "confidence": "high",
   "reason": "Valid"
+}
+```
+
+**Response (invalid):**
+```json
+{
+  "success": true,
+  "email": "nosuchuser@company.com",
+  "status": "invalid",
+  "isValid": false,
+  "confidence": "high",
+  "reason": "account_not_found"
+}
+```
+
+**Response (cannot validate):**
+```json
+{
+  "success": true,
+  "email": "someone@example.com",
+  "status": "unknown",
+  "isValid": null,
+  "confidence": "low",
+  "reason": "unverifiable"
 }
 ```
 
